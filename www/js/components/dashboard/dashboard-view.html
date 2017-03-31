@@ -1,0 +1,58 @@
+<ion-view view-title="Expenses list">
+  <ion-nav-buttons side="right">
+    <button class="button" ng-click="vm.addExpense()">
+      ADD
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <p class="section-info">Filters:</p>
+
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Month
+        </div>
+        <select ng-model="vm.selectedMonth" ng-options="month for month in vm.mountsList" ng-change="vm.filterExp()">
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Year
+        </div>
+        <select ng-model="vm.selectedYear" ng-options="year for year in vm.yearsList" ng-change="vm.filterExp()">
+        </select>
+      </label>
+    </div>
+
+    <p class="section-info">Month total: <span style="float: right; color: red;">{{vm.totalAmountOfMouth}} PLN</span></p>
+
+    <ion-list>
+      <ion-item ng-repeat="item in vm.filteredExpenses" class="item-avatar">
+        <img src="/img/cat-icon.png">
+
+        <div class="row" style="padding: 0">
+          <div class="col" style="padding: 0">
+            <h2>{{item.categoryName}}</h2>
+            <p>{{item.description}}</p>
+          </div>
+          <div class="col col-25" style="padding: 0; display: flex; align-items: center; justify-content: flex-end">
+            <p class="expense-amount" style="color: red; font-size: 16px;">
+              {{item.amount}} PLN
+            </p>
+          </div>
+        </div>
+
+        <ion-option-button class="button-assertive"
+                           ng-click="share(item)">
+          Delete
+        </ion-option-button>
+        <ion-option-button class="button-positive"
+                           ng-click="edit(item)">
+          Edit
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

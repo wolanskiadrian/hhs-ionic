@@ -1,0 +1,31 @@
+<ion-view view-title="Forgot password">
+  <ion-content>
+    <p class="app-title">HOUSEHOLD EXPENSES</p>
+
+    <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+    <div ng-if="vm.message" class="alert-positive">{{vm.message}}</div>
+
+    <form ng-submit="vm.forgot()" novalidate>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="Email" ng-model="vm.forgotData.email">
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.email.required">
+          This field is required!
+        </div>
+
+        <div class="form-error-message" ng-if="vm.validationResults.email.format">
+          Incorrect email format!
+        </div>
+
+        <input type="submit" value="Send" class="button button-block button-positive">
+      </div>
+    </form>
+
+    <div style="text-align: center">
+      <p><a ui-sref="login()">Back to login.</a></p>
+    </div>
+  </ion-content>
+</ion-view>
+

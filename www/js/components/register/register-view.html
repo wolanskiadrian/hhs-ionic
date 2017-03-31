@@ -1,0 +1,59 @@
+<ion-view view-title="Register">
+  <ion-content>
+    <p class="app-title" ng-click="vm.register()">HOUSEHOLD EXPENSES</p>
+
+    <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+    <div class="positive-alert" ng-if="vm.message">{{vm.message}}</div>
+
+    <form ng-submit="vm.register()" novalidate>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="Email *" ng-model="vm.registerData.email">
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.email.required">
+          This field is required!
+        </div>
+
+        <div class="form-error-message" ng-if="vm.validationResults.email.format">
+          Incorrect email format!
+        </div>
+
+        <label class="item item-input">
+          <input type="password" placeholder="Password *" ng-model="vm.registerData.password">
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.password.required">
+          This field is required!
+        </div>
+
+        <label class="item item-input">
+          <input type="password" placeholder="Confirm *" ng-model="vm.registerData.confirm">
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.confirm.required">
+          This field is required!
+        </div>
+
+        <div class="form-error-message" ng-if="vm.registerData.password !== vm.registerData.confirm">
+          Passwords mismatch!
+        </div>
+
+        <label class="item item-input">
+          <input type="text" placeholder="Firstname" ng-model="vm.registerData.firstname">
+        </label>
+
+        <label class="item item-input">
+          <input type="text" placeholder="Lastname" ng-model="vm.registerData.lastname">
+        </label>
+
+        <input type="submit" value="Register" class="button button-block button-positive">
+      </div>
+    </form>
+
+    <div style="text-align: center">
+      <p><a ui-sref="login()">Back to login.</a></p>
+    </div>
+  </ion-content>
+</ion-view>
+

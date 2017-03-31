@@ -1,0 +1,59 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "www/js/components/login/login-style";
+@import "www/js/components/dashboard/dashboard-style";
+
+.alert {
+  margin: 10px;
+  text-align: center;
+  background: #fb5e5e;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  border: 1px solid #ec0000;
+}
+
+.alert-positive {
+  margin: 10px;
+  text-align: center;
+  background: #36d644;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  border: 1px solid #3daf4d;
+}
+
+.form-error-message {
+  color: red;
+  padding: 5px 5px 10px 5px;
+}
+
+
+.item-complex .item-content, .item-radio .item-content{
+  padding: 16px;
+}
+
+.item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
+  padding-left: 72px;
+}
+

@@ -1,0 +1,50 @@
+<ion-view view-title="Add expense">
+  <ion-content>
+    <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+
+    <form ng-submit="vm.addExpense()" novalidate>
+      <div class="list list-inset">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Category
+          </div>
+          <!--<select ng-model="vm.categoryId" ng-options="category for category in vm.categoryList" ng-change="vm.filterExp()">-->
+          <!--</select>-->
+          <select class="form-control" ng-model="vm.expenseData.categoryId">
+            <option ng-repeat="category in vm.categories" ng-value="category._id">{{category.name}}</option>
+          </select>
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.categoryId.required">
+          This field is required!
+        </div>
+
+        <label class="item item-input">
+          <input type="text" placeholder="Vendor" ng-model="vm.expenseData.vendor">
+        </label>
+
+        <label class="item item-input">
+          <input type="number" placeholder="Amount" ng-model="vm.expenseData.amount">
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.amount.required">
+          This field is required!
+        </div>
+
+        <label class="item item-input">
+          <input type="date" placeholder="Date" ng-model="vm.expenseData.expenseDate">
+        </label>
+
+        <div class="form-error-message" ng-if="vm.validationResults.expenseDate.required">
+          This field is required!
+        </div>
+
+        <label class="item item-input">
+          <input type="text" placeholder="Description" ng-model="vm.expenseData.description">
+        </label>
+
+        <input type="submit" value="Add expense" class="button button-block button-positive">
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
