@@ -108,7 +108,7 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
         return _.uniqBy(tCategories, 'name');
     }
 
-    function init() {
+    vm.init = function() {
         $q.all([
             DashboardService.getAll(vm.user.id),
             DashboardService.getCategories(vm.user.id)
@@ -120,17 +120,9 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
             vm.yearsList = getYearsFromExpenses(vm.expenses);
             setCurrentDataFilters();
         });
-    }
-
-    init();
-
-    vm.logout = function () {
-        AuthFactory.isLoggedIn = false;
-        delete $window.sessionStorage.token;
-        delete $window.sessionStorage.userData;
-
-        $location.path('/login');
     };
+
+    vm.init();
 
     vm.addExpense = function () {
       $state.go('expense');
