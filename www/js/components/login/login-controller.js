@@ -27,7 +27,7 @@ function LoginController($location, $state, $window, $timeout, AuthFactory, Logi
             $window.sessionStorage.userData = JSON.stringify(res.data.user);
             AuthFactory.isLoggedIn = true;
             vm.errorMessage = null;
-            $state.go('dashboard');
+            $state.go('tab.dashboard');
           } else {
             vm.errorMessage = res.data.message;
             $timeout(function () {

@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-stable bar bar-header">
+    <div class="buttons">
+      <button class="button button-icon icon ion-ios-minus-outline"
+              ng-click="showDelete = !showDelete">
+      </button>
+    </div>
+    <h1 class="title">Categories</h1>
+    <button class="button"
+            ng-click="addCategory()">
+      ADD
+    </button>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list show-delete="showDelete">
+      <ion-item ng-repeat="item in categories" class="item-avatar" ng-click="setCategory(item)">
+        <ion-delete-button ng-click="deleteUserCatetory(item)" class="ion-minus-circled"></ion-delete-button>
+        <img src="/img/cat-icon.png">
+
+        <p>{{item.name}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer-bar align-title="center" class="bar-assertive">
+      <button class="button button-block" style="margin: 0;" ng-click="closeModal()">Back</button>
+  </ion-footer-bar>
+</ion-modal-view>

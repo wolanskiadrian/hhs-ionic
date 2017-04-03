@@ -1,19 +1,19 @@
 <ion-view view-title="{{vm.pageTitle}}">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backToDashboard()">
+      Back
+    </button>
+  </ion-nav-buttons>
+
   <ion-content>
     <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
 
     <form ng-submit="vm.sendExpense()" novalidate>
       <div class="list list-inset">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Category
-          </div>
-          <!--<select ng-model="vm.categoryId" ng-options="category for category in vm.categoryList" ng-change="vm.filterExp()">-->
-          <!--</select>-->
-          <select class="form-control" ng-model="vm.expenseData.categoryId">
-            <option ng-repeat="category in vm.categories" ng-value="category._id">{{category.name}}</option>
-          </select>
-        </label>
+        <div class="item" ng-click="vm.showCategoriesPopup()">
+          <p>{{vm.categoryName}}</p>
+          <p ng-if="!vm.categoryName">Choose category</p>
+        </div>
 
         <div class="form-error-message" ng-if="vm.validationResults.categoryId.required">
           This field is required!

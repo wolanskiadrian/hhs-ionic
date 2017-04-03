@@ -1,31 +1,38 @@
-<div class="container">
-    <h1>User profile</h1>
+<ion-view view-title="Profile">
+  <ion-content>
+    <p class="section-info" style="padding-bottom: 0;">Change your password:</p>
 
-    <h2>Zmiana hasła</h2>
-    <div class="form_content">
-        <div ng-if="vm.errorMessage" class="alert alert-danger">{{vm.errorMessage}}</div>
-        <div ng-if="vm.message" class="alert alert-success">{{vm.message}}</div>
+    <div class="alert-positive" ng-if="vm.message">{{vm.message}}</div>
 
-        <form ng-submit="vm.passwordChange()">
-            <input type="password" class="form-control" placeholder="Password" ng-model="vm.password" required>
+    <form ng-submit="vm.passwordChange()" novalidate>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="password" placeholder="Password" ng-model="vm.profileData.password">
+        </label>
 
-            <input type="password" class="form-control" placeholder="Confirm password" ng-model="vm.confirm" required>
+        <div class="form-error-message" ng-if="vm.validationResults.password.required">
+          This field is required!
+        </div>
 
-            <input type="submit" class="btn btn-primary" value="Send"/>
-        </form>
-    </div>
+        <label class="item item-input">
+          <input type="password" placeholder="Confirm password" ng-model="vm.profileData.confirm">
+        </label>
 
-    <h2>Kategorie</h2>
-    <div ng-repeat="category in vm.userCategories">
-        <hr/>
-        <p>Category Name: {{category.name}}</p>
-    </div>
+        <div class="form-error-message" ng-if="vm.validationResults.confirm.required">
+          This field is required!
+        </div>
 
-    <form ng-submit="vm.addCategory()">
-        <input type="text" class="form-control" placeholder="Category Name" ng-model="vm.categoryName" required>
-
-        <input type="text" class="form-control" placeholder="Category Icon" ng-model="vm.categoryIcon" required>
-
-        <input type="submit" class="btn btn-primary" value="Add category"/>
+        <input type="submit" value="Change" class="button button-block button-positive">
+      </div>
     </form>
-</div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col">
+        <button type="button" class="button button-block button-calm" style="margin-top: 0;" ng-click="vm.manageCategories()">Manage categories</button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

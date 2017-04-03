@@ -1,8 +1,8 @@
 angular.module('hhs-ionic').controller('ExpenseController', ExpenseController);
 
-ExpenseController.$inject = ['$state', '$timeout', '$window', 'ExpenseService', 'ValidatorService', '$ionicPopup'];
+ExpenseController.$inject = ['$state', '$timeout', '$window', 'ExpenseService', 'ValidatorService', '$ionicPopup', '$scope', '$ionicModal'];
 
-function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorService, $ionicPopup) {
+function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorService, $ionicPopup, $scope, $ionicModal) {
   var vm = this;
   vm.user = JSON.parse($window.sessionStorage.getItem('userData'));
   vm.errorMessage = null;
@@ -11,6 +11,11 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
   vm.categories = [];
   vm.editMode = $state.params.id ? true : false;
   vm.pageTitle = 'Add Expense';
+  vm.categoryName = '';
+
+  function getCategoryName(id) {
+    return _.find(vm.categories, {'_id': id}).name;
+  }
 
   function init() {
     ExpenseService.getCategories(vm.user.id)
@@ -29,14 +34,39 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
             vm.expenseData.amount = res.data.amount;
             vm.expenseData.expenseDate = new Date(res.data.expenseDate);
             vm.expenseData.description = res.data.description;
+
+            vm.categoryName = getCategoryName(res.data.categoryId);
           }
-          console.log(res);
-          // if(res.sta)
         });
     }
   }
 
   init();
+
+  $ionicModal.fromTemplateUrl('js/shared/popup-templates/categories.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modal = modal;
+  });
+
+
+  vm.showCategoriesPopup = function () {
+    $scope.categories = vm.categories;
+
+    $scope.modal.show();
+  };
+
+  $scope.setCategory = function (item) {
+    vm.expenseData.categoryId = item._id;
+    vm.categoryName = item.name;
+
+    $scope.modal.hide();
+  };
+
+  vm.backToDashboard = function () {
+    $state.go('tab.dashboard');
+  };
 
   vm.sendExpense = function () {
     vm.validationResults = ValidatorService.validateForm(['categoryId', 'amount', 'expenseDate'], vm.expenseData);
@@ -49,7 +79,7 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
         if(res){
           ExpenseService.edit($state.params.id,vm.expenseData).then(function (res) {
             if (res.status === 204) {
-              $state.go('dashboard');
+              $state.go('tab.dashboard');
             }
           });
         }
@@ -59,7 +89,7 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
         vm.expenseData.userId = vm.user.id;
         ExpenseService.add(vm.expenseData).then(function (res) {
           if (res.status === 201) {
-            $state.go('dashboard');
+            $state.go('tab.dashboard');
           }
         });
       }

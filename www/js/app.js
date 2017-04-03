@@ -60,11 +60,32 @@ angular.module('hhs-ionic', ['ionic'])
         controller: 'ForgotController',
         controllerAs: 'vm'
       })
-      .state('dashboard', {
+
+      .state('tab', {
+        url: '/tab',
+        abstract: true,
+        templateUrl: 'templates/tabs.html'
+      })
+
+      // .state('tab.dash', {
+      //   url: '/dash',
+      //   views: {
+      //     'tab-dash': {
+      //       templateUrl: 'templates/tab-dash.html',
+      //       controller: 'DashCtrl'
+      //     }
+      //   }
+      // })
+
+      .state('tab.dashboard', {
         url: '/dashboard',
-        templateUrl: 'js/components/dashboard/dashboard-view.html',
-        controller: 'DashboardController',
-        controllerAs: 'vm'
+        views: {
+          'tab-dashboard': {
+            templateUrl: 'js/components/dashboard/dashboard-view.html',
+            controller: 'DashboardController',
+            controllerAs: 'vm'
+          }
+        }
       })
       .state('expense-add', {
         url: '/expense/add',
@@ -77,8 +98,17 @@ angular.module('hhs-ionic', ['ionic'])
         templateUrl: 'js/components/expense/expense-add-view.html',
         controller: 'ExpenseController',
         controllerAs: 'vm'
+      })
+      .state('tab.profile', {
+        url: '/profile',
+        views: {
+          'tab-profile': {
+            templateUrl: 'js/components/profile/profile-view.html',
+            controller: 'ProfileController',
+            controllerAs: 'vm'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/login');
-
   });

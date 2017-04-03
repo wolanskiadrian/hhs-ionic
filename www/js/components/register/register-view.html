@@ -3,7 +3,7 @@
     <p class="app-title" ng-click="vm.register()">HOUSEHOLD EXPENSES</p>
 
     <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
-    <div class="positive-alert" ng-if="vm.message">{{vm.message}}</div>
+    <div class="alert-positive" ng-if="vm.message">{{vm.message}}</div>
 
     <form ng-submit="vm.register()" novalidate>
       <div class="list list-inset">
