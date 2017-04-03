@@ -1,4 +1,4 @@
-<ion-view view-title="Expenses list" ng-init="vm.init()">
+<ion-view view-title="Expenses">
   <ion-nav-buttons side="right">
     <button class="button" ng-click="vm.addExpense()">
       ADD
@@ -45,11 +45,11 @@
         </div>
 
         <ion-option-button class="button-assertive"
-                           ng-click="share(item)">
+                           ng-click="vm.deleteExpense(item._id, $index)">
           Delete
         </ion-option-button>
         <ion-option-button class="button-positive"
-                           ng-click="edit(item)">
+                           ui-sref="expense-edit({id: item._id})">
           Edit
         </ion-option-button>
       </ion-item>

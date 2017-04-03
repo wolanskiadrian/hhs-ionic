@@ -1,10 +1,3 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
 angular.module('hhs-ionic', ['ionic'])
 
   .run(function ($ionicPlatform, $window, $rootScope) {
@@ -42,25 +35,12 @@ angular.module('hhs-ionic', ['ionic'])
     });
   })
 
-  // .constant('API_URL', {url: 'http://localhost:1337'})
-  .constant('API_URL', {url: 'https://household-expenses.herokuapp.com'})
+  .constant('API_URL', {url: 'http://localhost:1337'})
+  // .constant('API_URL', {url: 'https://household-expenses.herokuapp.com'})
 
-  .config(function ($stateProvider, $urlRouterProvider) {
-
-    // Ionic uses AngularUI Router which uses the concept of states
-    // Learn more here: https://github.com/angular-ui/ui-router
-    // Set up the various states which the app can be in.
-    // Each state's controller can be found in controllers.js
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.views.maxCache(0);
     $stateProvider
-
-    // setup an abstract state for the tabs directive
-    //   .state('tab', {
-    //   url: '/tab',
-    //   abstract: true,
-    //   templateUrl: 'templates/tabs.html'
-    // })
-
-    // Each tab has its own nav history stack:
 
       .state('login', {
         url: '/login',
@@ -86,14 +66,19 @@ angular.module('hhs-ionic', ['ionic'])
         controller: 'DashboardController',
         controllerAs: 'vm'
       })
-      .state('expense', {
+      .state('expense-add', {
         url: '/expense/add',
+        templateUrl: 'js/components/expense/expense-add-view.html',
+        controller: 'ExpenseController',
+        controllerAs: 'vm'
+      })
+      .state('expense-edit', {
+        url: '/expense/edit/:id',
         templateUrl: 'js/components/expense/expense-add-view.html',
         controller: 'ExpenseController',
         controllerAs: 'vm'
       });
 
-    // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 
   });

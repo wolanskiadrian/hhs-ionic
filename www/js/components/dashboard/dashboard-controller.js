@@ -2,14 +2,13 @@ var MOUNTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', '
 
 angular.module('hhs-ionic').controller('DashboardController', DashboardController);
 
-DashboardController.$inject = ['$window', '$state', '$q', 'AuthFactory', 'DashboardService', 'ExpenseService'];
+DashboardController.$inject = ['$window', '$state', '$q', 'AuthFactory', 'DashboardService', 'ExpenseService', '$ionicPopup'];
 
-function DashboardController($window, $state, $q, AuthFactory, DashboardService, ExpenseService) {
+function DashboardController($window, $state, $q, AuthFactory, DashboardService, ExpenseService, $ionicPopup) {
     var vm = this;
     vm.user = JSON.parse($window.sessionStorage.getItem('userData'));
     vm.expenses = [];
     vm.mountsList = MOUNTHS;
-    console.log(vm.mountsList);
     vm.yearsList = [];
     vm.categoriesInMonth = [];
 
@@ -108,7 +107,7 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
         return _.uniqBy(tCategories, 'name');
     }
 
-    vm.init = function() {
+    function init() {
         $q.all([
             DashboardService.getAll(vm.user.id),
             DashboardService.getCategories(vm.user.id)
@@ -120,32 +119,13 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
             vm.yearsList = getYearsFromExpenses(vm.expenses);
             setCurrentDataFilters();
         });
-    };
+    }
 
-    vm.init();
+    init();
 
     vm.addExpense = function () {
-      $state.go('expense');
+      $state.go('expense-add');
     };
-
-    // vm.showAddNewExpenseModal = function () {
-    //     ModalService.showModal({
-    //         templateUrl: 'app/shared/modals/add-new-expense-modal/add-new-expense-modal-view.html',
-    //         controller: 'AddNewExpenseModalController',
-    //         controllerAs: 'vm',
-    //         inputs: {
-    //             title: 'Add New Expense',
-    //             categories: vm.categories,
-    //             userId: vm.user.id
-    //         }
-    //     }).then(function (modal) {
-    //         modal.close.then(function (res) {
-    //             if(res) {
-    //                 init();
-    //             }
-    //         })
-    //     });
-    // };
 
     vm.userProfile = function () {
         $location.path('/user/profile');
@@ -160,44 +140,18 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
         expense.editMode = param;
     };
 
-    // vm.editExpense = function (expense) {
-    //     ModalService.showModal({
-    //         templateUrl: 'app/shared/modals/confirm/confirm-view.html',
-    //         controller: 'ConfirmController',
-    //         controllerAs: 'vm',
-    //         inputs: {
-    //             title: 'Edit Expense',
-    //             message: 'Are you sure to edit this expense ?'
-    //         }
-    //     }).then(function (modal) {
-    //         modal.close.then(function (res) {
-    //             if(res) {
-    //                 ExpenseService.edit(expense._id, expense).then(function () {
-    //                     vm.quickEditMode(expense, false);
-    //                     init();
-    //                 });
-    //             }
-    //         })
-    //     });
-    // };
-
-    // vm.deleteExpense = function (id) {
-    //     ModalService.showModal({
-    //         templateUrl: 'app/shared/modals/confirm/confirm-view.html',
-    //         controller: 'ConfirmController',
-    //         controllerAs: 'vm',
-    //         inputs: {
-    //             title: 'Delete Expense',
-    //             message: 'Are you sure to delete this expense ?'
-    //         }
-    //     }).then(function (modal) {
-    //         modal.close.then(function (res) {
-    //             if(res) {
-    //                 ExpenseService.deleteOne(id).then(function () {
-    //                     init();
-    //                 });
-    //             }
-    //         })
-    //     });
-    // };
+    vm.deleteExpense = function (id, $index) {
+      $ionicPopup.confirm({
+        title: 'Delete expense',
+        template: 'Are you sure to delete this expense ?'
+      }).then(function (res) {
+        if(res) {
+          ExpenseService.deleteOne(id).then(function (res) {
+            if(res.status === 204) {
+              vm.filteredExpenses.splice($index, 1);
+            }
+          });
+        }
+      });
+    };
 };

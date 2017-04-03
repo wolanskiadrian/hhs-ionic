@@ -1,8 +1,8 @@
-<ion-view view-title="Add expense">
+<ion-view view-title="{{vm.pageTitle}}">
   <ion-content>
     <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
 
-    <form ng-submit="vm.addExpense()" novalidate>
+    <form ng-submit="vm.sendExpense()" novalidate>
       <div class="list list-inset">
         <label class="item item-input item-select">
           <div class="input-label">
@@ -43,7 +43,8 @@
           <input type="text" placeholder="Description" ng-model="vm.expenseData.description">
         </label>
 
-        <input type="submit" value="Add expense" class="button button-block button-positive">
+        <input type="submit" value="Add expense" ng-if="!vm.editMode" class="button button-block button-positive">
+        <input type="submit" value="Edit expense" ng-if="vm.editMode" class="button button-block button-positive">
       </div>
     </form>
   </ion-content>
