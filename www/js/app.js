@@ -35,8 +35,8 @@ angular.module('hhs-ionic', ['ionic'])
     });
   })
 
-  .constant('API_URL', {url: 'http://localhost:1337'})
-  // .constant('API_URL', {url: 'https://household-expenses.herokuapp.com'})
+  // .constant('API_URL', {url: 'http://localhost:1337'})
+  .constant('API_URL', {url: 'https://household-expenses.herokuapp.com'})
 
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.maxCache(0);
