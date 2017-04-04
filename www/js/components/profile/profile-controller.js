@@ -1,8 +1,8 @@
 angular.module('hhs-ionic').controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', '$window', '$timeout', 'ProfileService', 'ValidatorService', '$ionicModal', '$ionicPopup'];
+ProfileController.$inject = ['$scope', '$state', '$window', '$timeout', 'ProfileService', 'ValidatorService', '$ionicModal', '$ionicPopup'];
 
-function ProfileController($scope, $window, $timeout, ProfileService, ValidatorService, $ionicModal, $ionicPopup) {
+function ProfileController($scope, $state, $window, $timeout, ProfileService, ValidatorService, $ionicModal, $ionicPopup) {
   var vm = this;
   vm.user = JSON.parse($window.sessionStorage.getItem('userData'));
   vm.message = null;
@@ -119,5 +119,13 @@ function ProfileController($scope, $window, $timeout, ProfileService, ValidatorS
           init();
         }
       })
+  };
+
+  vm.logout = function () {
+    AuthFactory.isLoggedIn = false;
+    delete $window.sessionStorage.token;
+    delete $window.sessionStorage.userData;
+
+    $state.go('login');
   };
 };

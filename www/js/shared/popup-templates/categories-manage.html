@@ -13,7 +13,7 @@
   </ion-header-bar>
   <ion-content>
     <ion-list show-delete="showDelete">
-      <ion-item ng-repeat="item in categories" class="item-avatar" ng-click="setCategory(item)">
+      <ion-item ng-repeat="item in categories" class="item-avatar" ng-click="setCategory(item)" ng-if="item.isActive">
         <ion-delete-button ng-click="deleteUserCatetory(item)" class="ion-minus-circled"></ion-delete-button>
         <img src="/img/cat-icon.png">
 

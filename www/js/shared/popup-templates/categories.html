@@ -4,7 +4,7 @@
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="item in categories" class="item-avatar" ng-click="setCategory(item)">
+      <ion-item ng-repeat="item in categories" ng-if="item.isActive" class="item-avatar" ng-click="setCategory(item)">
         <img src="/img/cat-icon.png">
 
         <p>{{item.name}}</p>
