@@ -46,11 +46,11 @@
 
         <ion-option-button class="button-assertive"
                            ng-click="vm.deleteExpense(item._id, $index)">
-          Delete
+          <i class="icon ion-ios-trash-outline" style="margin: auto;"></i>
         </ion-option-button>
         <ion-option-button class="button-positive"
                            ui-sref="expense-edit({id: item._id})">
-          Edit
+          <i class="icon ion-edit" style="margin: auto;"></i>
         </ion-option-button>
       </ion-item>
     </ion-list>
