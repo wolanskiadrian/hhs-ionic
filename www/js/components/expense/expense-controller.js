@@ -64,6 +64,11 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
     $scope.modal.hide();
   };
 
+  $scope.closeModal = function () {
+    init();
+    $scope.modal.hide();
+  };
+
   vm.backToDashboard = function () {
     $state.go('tab.dashboard');
   };
