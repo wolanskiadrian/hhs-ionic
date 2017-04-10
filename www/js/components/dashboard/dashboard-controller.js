@@ -8,7 +8,7 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
     var vm = this;
     vm.user = JSON.parse($window.sessionStorage.getItem('userData'));
     vm.expenses = [];
-    vm.mountsList = MOUNTHS;
+    vm.monthsList = MOUNTHS;
     vm.yearsList = [];
     vm.categoriesInMonth = [];
 
@@ -82,6 +82,8 @@ function DashboardController($window, $state, $q, AuthFactory, DashboardService,
         _.forEach(vm.categoriesInMonth, function (cat) {
             vm.totalAmountOfMouth += cat.amount;
         });
+
+      vm.totalAmountOfMouth = parseFloat(Math.round(vm.totalAmountOfMouth * 100) / 100).toFixed(2);
     }
 
     function getMonthDetailsData(categoriesInMonth, fe) {

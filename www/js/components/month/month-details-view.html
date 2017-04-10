@@ -1,12 +1,11 @@
-<ion-view view-title="Expenses">
-  <ion-nav-buttons side="right">
-    <button class="button" ng-click="vm.addExpense()">
-      ADD
+<ion-view view-title="Month Details">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backToDashboard()">
+      Back
     </button>
   </ion-nav-buttons>
 
   <ion-content>
-
     <p class="section-info">Filters:</p>
 
     <div class="list">
@@ -26,16 +25,14 @@
       </label>
     </div>
 
-    <p class="section-info">Month total: <span style="float: right; color: red;">{{vm.totalAmountOfMouth}} PLN</span></p>
-
+    <p class="section-info">Categories total: <span style="float: right; color: red;">{{vm.totalAmountOfMouth}} PLN</span></p>
     <ion-list>
-      <ion-item ng-repeat="item in vm.filteredExpenses" class="item-avatar" ui-sref="expense-details({id: item._id})">
+      <ion-item ng-repeat="item in vm.categoriesInMonth" ui-sref="month-category-info({index: $index})" class="item-avatar month-item" style="display: flex; align-items: center; width: 100%;">
         <img src="/img/cat-icon.png">
 
         <div class="row" style="padding: 0">
           <div class="col" style="padding: 0">
-            <h2>{{item.categoryName}}</h2>
-            <p>{{item.description}}</p>
+            <p>{{item.name}}</p>
           </div>
           <div class="col col-33" style="padding: 0; display: flex; align-items: center; justify-content: flex-end">
             <p class="expense-amount" style="color: red; font-size: 16px;">
@@ -43,15 +40,6 @@
             </p>
           </div>
         </div>
-
-        <ion-option-button class="button-assertive"
-                           ng-click="vm.deleteExpense(item._id, $index)">
-          <i class="icon ion-ios-trash-outline" style="margin: auto;"></i>
-        </ion-option-button>
-        <ion-option-button class="button-positive"
-                           ui-sref="expense-edit({id: item._id})">
-          <i class="icon ion-edit" style="margin: auto;"></i>
-        </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

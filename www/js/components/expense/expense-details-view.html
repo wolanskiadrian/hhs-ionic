@@ -1,0 +1,40 @@
+<ion-view view-title="{{vm.pageTitle}}">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backToDashboard()">
+      Back
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <div class="alert" ng-if="vm.errorMessage">{{vm.errorMessage}}</div>
+
+    <form ng-submit="vm.sendExpense()" novalidate>
+      <div class="list list-inset">
+        <div class="item">
+          <h2>Category:</h2>
+          <p>{{vm.categoryName}}</p>
+        </div>
+
+        <div class="item">
+          <h2>Vendor:</h2>
+          <p>{{vm.expenseData.vendor}}</p>
+        </div>
+
+        <div class="item">
+          <h2>Amount:</h2>
+          <p>{{vm.expenseData.amount}}</p>
+        </div>
+
+        <div class="item">
+          <h2>Date:</h2>
+          <p>{{vm.expenseData.expenseDate | date : 'dd.MM.yyyy'}}</p>
+        </div>
+
+        <div class="item">
+          <h2>Description:</h2>
+          <p>{{vm.expenseData.description}}</p>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

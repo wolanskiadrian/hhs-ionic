@@ -1,0 +1,26 @@
+<ion-view view-title="Category Details">
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backToMonth()">
+      Back
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <p class="section-info">{{vm.currentCategory.name}}: <span style="float: right; color: red;">{{vm.totalAmountOfCategory}} PLN</span></p>
+    <ion-list>
+      <ion-item ng-repeat="item in vm.currentCategoriesExpenses" class="month-item" style="display: flex; align-items: center;">
+        <div class="row" style="padding: 0">
+          <div class="col" style="padding: 0">
+            <h2>{{item.vendor}}</h2>
+            <p>{{item.description}}</p>
+          </div>
+          <div class="col col-33" style="padding: 0; display: flex; align-items: center; justify-content: flex-end">
+            <p class="expense-amount" style="color: red; font-size: 16px;">
+              {{item.amount}} PLN
+            </p>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

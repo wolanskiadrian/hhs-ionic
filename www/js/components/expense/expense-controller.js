@@ -24,8 +24,6 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
       });
 
     if($state.params.id) {
-      vm.pageTitle = 'Edit Expense';
-
       ExpenseService.getExpense($state.params.id)
         .then(function (res) {
           if(res.status === 200) {
@@ -38,6 +36,12 @@ function ExpenseController($state, $timeout, $window, ExpenseService, ValidatorS
             vm.categoryName = getCategoryName(res.data.categoryId);
           }
         });
+
+      if($state.current.name === 'expense-edit') {
+        vm.pageTitle = 'Edit Expense';
+      } else if($state.current.name === 'expense-details') {
+        vm.pageTitle = 'Expense Details';
+      }
     }
   }
 

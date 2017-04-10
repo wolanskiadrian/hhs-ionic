@@ -19,9 +19,10 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
-@import "www/js/components/login/login-style";
-@import "www/js/components/dashboard/dashboard-style";
+@import "../www/lib/ionic/scss/ionic";
+@import "../www/js/components/login/login-style";
+@import "../www/js/components/dashboard/dashboard-style";
+@import "../www/js/components/month/month-style";
 
 .alert {
   margin: 10px;
@@ -56,4 +57,3 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
   padding-left: 72px;
 }
-

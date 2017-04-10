@@ -9826,6 +9826,11 @@ a.button {
   padding: 16px;
   margin: 0; }
 
+.month-item a.item-content {
+  display: flex;
+  align-items: center;
+  width: 100%; }
+
 .alert {
   margin: 10px;
   text-align: center;

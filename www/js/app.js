@@ -35,8 +35,8 @@ angular.module('hhs-ionic', ['ionic'])
     });
   })
 
-  .constant('API_URL', {url: 'http://localhost:1337'})
-  // .constant('API_URL', {url: 'https://household-expenses.herokuapp.com'})
+  // .constant('API_URL', {url: 'http://localhost:1337'})
+  .constant('API_URL', {url: 'https://household-expenses.herokuapp.com'})
 
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.maxCache(0);
@@ -67,16 +67,6 @@ angular.module('hhs-ionic', ['ionic'])
         templateUrl: 'templates/tabs.html'
       })
 
-      // .state('tab.dash', {
-      //   url: '/dash',
-      //   views: {
-      //     'tab-dash': {
-      //       templateUrl: 'templates/tab-dash.html',
-      //       controller: 'DashCtrl'
-      //     }
-      //   }
-      // })
-
       .state('tab.dashboard', {
         url: '/dashboard',
         views: {
@@ -86,6 +76,12 @@ angular.module('hhs-ionic', ['ionic'])
             controllerAs: 'vm'
           }
         }
+      })
+      .state('expense-details', {
+        url: '/expense/details/:id',
+        templateUrl: 'js/components/expense/expense-details-view.html',
+        controller: 'ExpenseController',
+        controllerAs: 'vm'
       })
       .state('expense-add', {
         url: '/expense/add',
@@ -97,6 +93,22 @@ angular.module('hhs-ionic', ['ionic'])
         url: '/expense/edit/:id',
         templateUrl: 'js/components/expense/expense-add-view.html',
         controller: 'ExpenseController',
+        controllerAs: 'vm'
+      })
+      .state('tab.month', {
+        url: '/month',
+        views: {
+          'tab-month': {
+            templateUrl: 'js/components/month/month-details-view.html',
+            controller: 'MonthController',
+            controllerAs: 'vm'
+          }
+        }
+      })
+      .state('month-category-info', {
+        url: '/month/category/:index',
+        templateUrl: 'js/components/month/month-category-details-view.html',
+        controller: 'MonthController',
         controllerAs: 'vm'
       })
       .state('tab.profile', {
